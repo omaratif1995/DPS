@@ -26,7 +26,9 @@ void left_sensor() {
 	std::this_thread::sleep_for(1s);
 	}
 
-}void right_sensor() {
+}
+
+void right_sensor() {
 	char c_right;
 	while (counter < 10){
 	mtx.lock();
