@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Platoon pure function", "Platoon pure function.vcxproj", "{805E377A-691F-4BE9-A411-F05C44670DBE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{805E377A-691F-4BE9-A411-F05C44670DBE}.Debug|x64.ActiveCfg = Debug|x64
+		{805E377A-691F-4BE9-A411-F05C44670DBE}.Debug|x64.Build.0 = Debug|x64
+		{805E377A-691F-4BE9-A411-F05C44670DBE}.Debug|x86.ActiveCfg = Debug|Win32
+		{805E377A-691F-4BE9-A411-F05C44670DBE}.Debug|x86.Build.0 = Debug|Win32
+		{805E377A-691F-4BE9-A411-F05C44670DBE}.Release|x64.ActiveCfg = Release|x64
+		{805E377A-691F-4BE9-A411-F05C44670DBE}.Release|x64.Build.0 = Release|x64
+		{805E377A-691F-4BE9-A411-F05C44670DBE}.Release|x86.ActiveCfg = Release|Win32
+		{805E377A-691F-4BE9-A411-F05C44670DBE}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC1D8A1F-166E-4CB1-99D6-9A6667C8AA8B}
+	EndGlobalSection
+EndGlobal

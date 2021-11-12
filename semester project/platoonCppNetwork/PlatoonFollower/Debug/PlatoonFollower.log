@@ -1,0 +1,3 @@
+﻿  main.cpp
+F:\DSP\DPS\platoonCppNetwork\PlatoonFollower\main.cpp(9,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  PlatoonFollower.vcxproj -> F:\DSP\DPS\platoonCppNetwork\PlatoonFollower\Debug\PlatoonFollower.exe
