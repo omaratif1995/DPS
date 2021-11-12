@@ -1,0 +1,3 @@
+﻿  main.cpp
+F:\DSP\DPS\platoonCppNetwork\PlatoonLeader\main.cpp(10,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  PlatoonLeader.vcxproj -> F:\DSP\DPS\platoonCppNetwork\PlatoonLeader\Debug\PlatoonLeader.exe
