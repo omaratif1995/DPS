@@ -1,89 +1,131 @@
 #pragma once
 #include "Truck.h"
+#include<omp.h>
+using namespace std::chrono_literals;
 
-void connection_thread() {
-	leader.connect(follower1);
-	std::this_thread::sleep_for(2s);
-	leader.connect(follower2); 
-	std::this_thread::sleep_for(2s);
-	leader.connect(follower3);
-	std::this_thread::sleep_for(1s);
-}
-
-void maintainConnection_thread() {
+void thread_maintainConnection() {
 	while (1) {
-		if (!follower1.isConnected) leader.connect(follower1);
-		std::this_thread::sleep_for(500ms);
-		if (!follower2.isConnected) leader.connect(follower2);
-		std::this_thread::sleep_for(500ms);
-		if (!follower3.isConnected) leader.connect(follower3);
-		std::this_thread::sleep_for(50ms);
+#pragma omp parallel num_threads(3)
+{
+#pragma omp task
+{
+	if (!truck1.isConnected) truck0.connect(truck1);
+	std::this_thread::sleep_for(100ms);
+}		
+#pragma omp task
+{
+	if (!truck2.isConnected) truck0.connect(truck2);
+	std::this_thread::sleep_for(100ms);
+}
+#pragma omp task
+{
+	if (!truck3.isConnected) truck0.connect(truck3);
+	std::this_thread::sleep_for(100ms);
+}
+}	
 	}
 }
 
-void velocity_thread() {
+void thread_speedControl() {
+	while (1) {
+#pragma omp parallel num_threads(3)
+{	
+#pragma omp task
+{
+	double v_target = truck0.get_velocity();
+	double v_current = truck1.get_velocity();
+	if (v_current < v_target) { truck1.accelerate(v_target); }
+	else if (v_current > v_target) { truck1.deccelerate(v_target); }
 	std::this_thread::sleep_for(200ms);
-	while (1) {
-		double current_v= leader.get_velocity();
-		follower1.set_velocity(current_v);
-		std::this_thread::sleep_for(1.5s);
-		follower2.set_velocity(current_v);
-		std::this_thread::sleep_for(1.5s);
-		follower3.set_velocity(current_v);
-
-		std::this_thread::sleep_for(500ms);
+}
+#pragma omp task
+{
+	double v_target = truck0.get_velocity();
+	double v_current = truck2.get_velocity();
+	if (v_current < v_target) { truck2.accelerate(v_target); }
+	else if (v_current > v_target) { truck2.deccelerate(v_target); }
+	std::this_thread::sleep_for(200ms);
+}
+#pragma omp task
+{
+	double v_target = truck0.get_velocity();
+	double v_current = truck3.get_velocity();
+	if (v_current < v_target) { truck3.accelerate(v_target); }
+	else if (v_current > v_target) { truck3.deccelerate(v_target); }
+	std::this_thread::sleep_for(200ms);
+}
+}
 	}
 }
 
-void acceleration_thread() {
-	std::this_thread::sleep_for(500ms);
+void thread_steering() {
 	while (1) {
-		double current_a= leader.get_acceleration();
-		follower1.set_acceleration(current_a);
-		std::this_thread::sleep_for(1.5s);
-		follower2.set_acceleration(current_a);
-		std::this_thread::sleep_for(1.5s);
-		follower3.set_acceleration(current_a);
-
-		std::this_thread::sleep_for(500ms);
+#pragma omp parallel num_threads(3)
+{
+#pragma omp task
+{
+	double target_angle = truck0.get_angle();
+	truck1.set_angle(target_angle);
+	std::this_thread::sleep_for(100ms);
+}
+#pragma omp task
+{
+	double target_angle = truck0.get_angle();
+	truck2.set_angle(target_angle);
+	std::this_thread::sleep_for(100ms);
+}
+#pragma omp task
+{
+	double target_angle = truck0.get_angle();
+	truck3.set_angle(target_angle);
+	std::this_thread::sleep_for(100ms);
+}
+}
 	}
 }
 
-void angle_thread() {
-	std::this_thread::sleep_for(600ms);
+void thread_braking() {	
 	while (1) {
-		double current_angle = leader.get_angle();
-		follower1.set_acceleration(current_angle);
-		std::this_thread::sleep_for(1.5s);
-		follower2.set_acceleration(current_angle);
-		std::this_thread::sleep_for(1.5s);
-		follower3.set_acceleration(current_angle);
-
-		std::this_thread::sleep_for(500ms);
+#pragma omp parallel num_threads(3)
+{
+#pragma omp task
+{
+	if (truck0.isBraking) truck1.brake();
+	std::this_thread::sleep_for(100ms);
+}
+#pragma omp task
+{
+	if (truck0.isBraking) truck2.brake();
+	std::this_thread::sleep_for(100ms);
+}
+#pragma omp task
+{
+	if (truck0.isBraking) truck3.brake();
+	std::this_thread::sleep_for(100ms);	
+}
+}
 	}
 }
 
-void brake_thread() {
-	
+void thread_maintainDistance() {
 	while (1) {
-		if (leader.isBraking())
-		{
-			follower1.brake();
-			follower2.brake();
-			follower3.brake();
-		}
-		std::this_thread::sleep_for(50ms);
-	}
+#pragma omp parallel num_threads(3)
+{
+#pragma omp task
+{
+	truck1.maintain_distance();
+	std::this_thread::sleep_for(200ms);
 }
-
-void maintainDistance_thread() {
-	std::this_thread::sleep_for(800ms);
-	while (1) {
-		follower1.maintain_distance();
-		std::this_thread::sleep_for(1.5s);
-		follower2.maintain_distance();
-		std::this_thread::sleep_for(1.5s);
-		follower3.maintain_distance();
-		std::this_thread::sleep_for(500ms);
+#pragma omp task
+{
+	truck1.maintain_distance();
+	std::this_thread::sleep_for(200ms);
+}
+#pragma omp task
+{
+	truck1.maintain_distance();
+	std::this_thread::sleep_for(200ms);
+}
+}
 	}
 }
