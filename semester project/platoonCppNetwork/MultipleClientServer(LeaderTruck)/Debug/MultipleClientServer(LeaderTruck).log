@@ -1,4 +1,0 @@
-﻿  Source.cpp
-C:\Users\hp\source\repos\MultipleClientServer(LeaderTruck)\Source.cpp(11,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
-C:\Users\hp\source\repos\MultipleClientServer(LeaderTruck)\Source.cpp(124,24): warning C4018: '<': signed/unsigned mismatch
-  MultipleClientServer(LeaderTruck).vcxproj -> C:\Users\hp\source\repos\MultipleClientServer(LeaderTruck)\Debug\MultipleClientServer(LeaderTruck).exe

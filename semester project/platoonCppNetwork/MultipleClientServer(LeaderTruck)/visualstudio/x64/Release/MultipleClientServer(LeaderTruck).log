@@ -1,0 +1,12 @@
+﻿  Source.cpp
+C:\Users\hp\source\repos\MultipleClientServer(LeaderTruck)\Source.cpp(11,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+C:\Users\hp\source\repos\MultipleClientServer(LeaderTruck)\Source.cpp(106,62): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\hp\source\repos\MultipleClientServer(LeaderTruck)\Source.cpp(158,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\hp\source\repos\MultipleClientServer(LeaderTruck)\Source.cpp(167,58): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\hp\source\repos\MultipleClientServer(LeaderTruck)\Source.cpp(189,44): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Generating code
+  1 of 149 functions ( 0.7%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  MultipleClientServer(LeaderTruck).vcxproj -> C:\Users\hp\source\repos\MultipleClientServer(LeaderTruck)\x64\Release\MultipleClientServer(LeaderTruck).exe
