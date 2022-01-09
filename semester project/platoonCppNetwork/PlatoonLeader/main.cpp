@@ -30,7 +30,7 @@ void main()
 	// Bind the ip address and port to a socket
 	sockaddr_in hint;
 	hint.sin_family = AF_INET;
-	hint.sin_port = htons(54000);
+	hint.sin_port = 5000;
 	hint.sin_addr.S_un.S_addr = INADDR_ANY; // Could also use inet_pton .... 
 
 	bind(listening, (sockaddr*)&hint, sizeof(hint));
