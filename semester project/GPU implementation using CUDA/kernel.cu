@@ -6,10 +6,10 @@
 
 #define NUM_SENSORS 50
 
-__global__ void readSensorVals(double *readings, Sensor *sensors)
+__global__ void readSensorVals(int n, double *readings, Sensor *sensors)
 {
     int i = threadIdx.x;
-    if(i < NUM_SENSORS)
+    if(i < n)
     readings[i] = sensors[i].read();
 }
 
@@ -21,7 +21,7 @@ int main()
     cudaMalloc(&readings, NUM_SENSORS * sizeof(double));
     cudaMalloc(&sensors, NUM_SENSORS * sizeof(Sensor));
 
-    readSensorVals <<<1, NUM_SENSORS >>> (&readings,&sensors);
+    readSensorVals <<<1, NUM_SENSORS >>> (NUM_SENSORS,&readings,&sensors);
 
     cudaFree(readings);
     cudaFree(sensors);
