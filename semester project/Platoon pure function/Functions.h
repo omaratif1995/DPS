@@ -3,6 +3,7 @@
 #include<omp.h>
 using namespace std::chrono_literals;
 
+// DONE BY: LEADER ONLY
 void thread_maintainConnection() {
 	while (1) {
 #pragma omp parallel num_threads(3)
@@ -27,6 +28,7 @@ void thread_speedControl() {
 	while (1) {
 #pragma omp parallel num_threads(3)
 {	
+// DONE BY:	FOLLOWER (RANK1)
 #pragma omp task
 {
 	double v_target = truck0.get_velocity();
@@ -34,6 +36,7 @@ void thread_speedControl() {
 	if (v_current < v_target) { truck1.accelerate(v_target); }
 	else if (v_current > v_target) { truck1.deccelerate(v_target); }
 }
+// DONE BY:	FOLLOWER (RANK2)
 #pragma omp task
 {
 	double v_target = truck0.get_velocity();
@@ -41,6 +44,7 @@ void thread_speedControl() {
 	if (v_current < v_target) { truck2.accelerate(v_target); }
 	else if (v_current > v_target) { truck2.deccelerate(v_target); }
 }
+// DONE BY:	FOLLOWER (RANK3)
 #pragma omp task
 {
 	double v_target = truck0.get_velocity();
@@ -56,16 +60,19 @@ void thread_steering() {
 	while (1) {
 #pragma omp parallel num_threads(3)
 {
+// DONE BY:	FOLLOWER (RANK1)
 #pragma omp task
 {
 	double target_angle = truck0.get_angle();
 	truck1.set_angle(target_angle);
 }
+// DONE BY:	FOLLOWER (RANK2)
 #pragma omp task
 {
 	double target_angle = truck0.get_angle();
 	truck2.set_angle(target_angle);
 }
+// DONE BY:	FOLLOWER (RANK3)
 #pragma omp task
 {
 	double target_angle = truck0.get_angle();
@@ -79,14 +86,17 @@ void thread_braking() {
 	while (1) {
 #pragma omp parallel num_threads(3)
 {
+// DONE BY:	FOLLOWER (RANK1)
 #pragma omp task
 {
 	if (truck0.isBraking) truck1.brake();
 }
+// DONE BY:	FOLLOWER (RANK2)
 #pragma omp task
 {
 	if (truck0.isBraking) truck2.brake();
 }
+// DONE BY:	FOLLOWER (RANK3)
 #pragma omp task
 {
 	if (truck0.isBraking) truck3.brake();
@@ -99,17 +109,20 @@ void thread_maintainDistance() {
 	while (1) {
 #pragma omp parallel num_threads(3)
 {
+// DONE BY:	FOLLOWER (RANK1)
 #pragma omp task
 {
 	truck1.maintain_distance();
 }
+// DONE BY:	FOLLOWER (RANK2)
 #pragma omp task
 {
-	truck1.maintain_distance();
+	truck2.maintain_distance();
 }
+// DONE BY:	FOLLOWER (RANK3)
 #pragma omp task
 {
-	truck1.maintain_distance();
+	truck3.maintain_distance();
 }
 }
 	}
