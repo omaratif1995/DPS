@@ -1,0 +1,4 @@
+﻿  main.cpp
+C:\Users\omara\Downloads\Data\Fh\DPS\DPS\semester project\platoonCppNetwork\PlatoonFollower - 2\visualstudiofiles\main.cpp(9,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+C:\Users\omara\Downloads\Data\Fh\DPS\DPS\semester project\platoonCppNetwork\PlatoonFollower - 2\visualstudiofiles\main.cpp(64,74): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  PlatoonFollower.vcxproj -> C:\Users\omara\Downloads\Data\Fh\DPS\DPS\semester project\platoonCppNetwork\PlatoonFollower - 2\visualstudiofiles\x64\Debug\PlatoonFollower.exe

@@ -1,0 +1,7 @@
+﻿  Source.cpp
+C:\Users\omara\Downloads\Data\Fh\DPS\DPS\semester project\platoonCppNetwork\MultipleClientServer(LeaderTruck)\visualstudio\Source.cpp(12,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+C:\Users\omara\Downloads\Data\Fh\DPS\DPS\semester project\platoonCppNetwork\MultipleClientServer(LeaderTruck)\visualstudio\Source.cpp(110,54): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\omara\Downloads\Data\Fh\DPS\DPS\semester project\platoonCppNetwork\MultipleClientServer(LeaderTruck)\visualstudio\Source.cpp(192,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\omara\Downloads\Data\Fh\DPS\DPS\semester project\platoonCppNetwork\MultipleClientServer(LeaderTruck)\visualstudio\Source.cpp(201,58): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\omara\Downloads\Data\Fh\DPS\DPS\semester project\platoonCppNetwork\MultipleClientServer(LeaderTruck)\visualstudio\Source.cpp(223,44): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  MultipleClientServer(LeaderTruck).vcxproj -> C:\Users\omara\Downloads\Data\Fh\DPS\DPS\semester project\platoonCppNetwork\MultipleClientServer(LeaderTruck)\visualstudio\x64\Debug\MultipleClientServer(LeaderTruck).exe

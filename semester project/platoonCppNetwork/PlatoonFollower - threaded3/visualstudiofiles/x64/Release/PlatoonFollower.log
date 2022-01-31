@@ -1,0 +1,8 @@
+﻿  main.cpp
+F:\DSP\DPS\semester project\platoonCppNetwork\PlatoonFollower\main.cpp(9,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+F:\DSP\DPS\semester project\platoonCppNetwork\PlatoonFollower\main.cpp(62,74): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 111 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  PlatoonFollower.vcxproj -> F:\DSP\DPS\semester project\platoonCppNetwork\PlatoonFollower\x64\Release\PlatoonFollower.exe
