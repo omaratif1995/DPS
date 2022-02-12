@@ -108,7 +108,7 @@ int main()
         if (!img.isContinuous()) {
             img = img.clone();
         }
-
+		
 
 
         VideoCapture cap(1);
@@ -147,7 +147,7 @@ int main()
                 std::cerr << "bytes = " << bytes << std::endl;
                 break;
             }
-			//increase the counter 
+			//increase the counter to next frame
             i++;
         }
         }, ConnectSocket);

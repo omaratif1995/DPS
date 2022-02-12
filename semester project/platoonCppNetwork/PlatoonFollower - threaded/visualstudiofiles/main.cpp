@@ -1,3 +1,8 @@
+/*
+* Team : seniors
+* Course : Distributed and parallel Systems
+* Author: Omar
+*/
 #include <iostream>
 #include <string>
 #include <WS2tcpip.h>
@@ -7,6 +12,11 @@
 
 using namespace std;
 char buf[4096];
+/**
+*Overview : a threaded client application that can send and receive messages at the same time
+* without having the issue of blocking the main thread with the send and receive functions
+* we can make as much instances of this application and each application will represent a Truck
+**/
 void receive(SOCKET sock)
 {
 	ZeroMemory(buf, 4096);

@@ -1,3 +1,9 @@
+/*
+* Team : seniors
+* Course : Distributed and parallel Systems
+* Application : a server that can handle the connection with multiple clients
+*/
+
 #include <iostream>
 #include <WS2tcpip.h>
 #include <string>
@@ -10,6 +16,7 @@ using namespace std;
 int x = 1;
 void main()
 {
+	
 	// Initialze winsock
 	WSADATA wsData;
 	WORD ver = MAKEWORD(2, 2);
@@ -144,44 +151,22 @@ void main()
 							FD_CLR(sock, &master);
 							cout << "Truck # " << sock << " dropped from the platoon\n\r";
 						}
-						/*if (buf2 == "speed")
-						{
-
-							std::thread t1([](FD_SET master, SOCKET sock) {
-								for (int i = 0; i < master.fd_count; i++)
-								{
-									SOCKET outSock2 = master.fd_array[i];
-									int f = 120;
-									if (outSock2 == sock)
-									{
-										ostringstream m;
-										m << "from leader > Hi Truck # " << sock << " my speed is " << "\r\n";
-										string strOut2 = m.str();
-
-										send(outSock2, strOut2.c_str(), strOut2.size() + 1, 0);
-									}
-								}
-							}, master, sock);
-
-							
-						}*/
 
 
-						//// Unknown command
-						//continue;
+
+
 					}
 					
 
-
+					// remove any new line in the string
 					buf2.erase(std::remove(buf2.begin(), buf2.end(), '\n'), buf2.end());
+					// make a string stream to store the received message in it
 					ostringstream received;
-					//buf.str();
-					
+
+					//store the message 
 					received << "truck # " << sock << " says : " << buf2 << "\r";
 					string received_str = received.str();
-					//received_str[strcspn(received_str, "\n")] = 0;
-					//received_str.erase(std::remove(received_str.begin(), received_str.end(), '\n'), received_str.end());
-					//strtok(received_str, "\n");
+
 
 					cout << received_str << endl;
 					// Check to see if it's a command. \quit kills the server

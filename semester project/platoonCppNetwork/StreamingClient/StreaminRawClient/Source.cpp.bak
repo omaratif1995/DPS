@@ -103,7 +103,7 @@ int main()
 
     std::thread t1([](SOCKET ConnectSocket) {
         Mat img, imgGray;
-        img = Mat::zeros(480, 640, CV_8UC3);
+        img = Mat::zeros(480, 640, CV_8UC1);
         //make it continuous
         if (!img.isContinuous()) {
             img = img.clone();

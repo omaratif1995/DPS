@@ -1,3 +1,8 @@
+/*
+* Team : seniors
+* Course : Distributed and parallel Systems
+* Author: Omar
+*/
 #include <iostream>
 #include <WS2tcpip.h>
 #include <string>
@@ -5,7 +10,10 @@
 #pragma comment (lib, "ws2_32.lib")
 
 using namespace std;
-
+/**
+*Overview : this is an intitial version of the server which is limited because it can only accept 
+* the connection from one client that's why Multiclient server application was proposed
+**/
 void main()
 {
 	// Initialze winsock
