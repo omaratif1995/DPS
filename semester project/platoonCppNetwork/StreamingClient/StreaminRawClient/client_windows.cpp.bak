@@ -1,0 +1,144 @@
+#define WIN32_LEAN_AND_MEAN
+
+#include <windows.h>
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include "opencv2/opencv.hpp"
+#include <iostream>
+#include <ctime>
+#include <ratio>
+#include <chrono>
+#include <fstream>
+#include <ostream>
+#include <string>
+#include <thread>
+
+// Need to link with Ws2_32.lib, Mswsock.lib, and Advapi32.lib
+#pragma comment (lib, "Ws2_32.lib")
+#pragma comment (lib, "Mswsock.lib")
+#pragma comment (lib, "AdvApi32.lib")
+
+
+#define DEFAULT_BUFLEN 512
+// change the port here according to the desired port
+#define DEFAULT_PORT "27015"
+using namespace std::chrono;
+using namespace cv;
+int main()
+{
+	//_____________________________TCP client code________________________________
+    WSADATA wsaData;
+    SOCKET ConnectSocket = INVALID_SOCKET;
+    struct addrinfo* result = NULL,
+        * ptr = NULL,
+        hints;
+    const char* sendbuf = "this is a tesnnnnnnnnnnnnnt";
+    char recvbuf[DEFAULT_BUFLEN];
+    int iResult;
+    int recvbuflen = DEFAULT_BUFLEN;
+
+
+
+    // Initialize Winsock
+    iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
+    if (iResult != 0) {
+        printf("WSAStartup failed with error: %d\n", iResult);
+        return 1;
+    }
+
+    ZeroMemory(&hints, sizeof(hints));
+    hints.ai_family = AF_UNSPEC;
+    hints.ai_socktype = SOCK_STREAM;
+    hints.ai_protocol = IPPROTO_TCP;
+
+    // Resolve the server address and port
+	// change the ip here according to the server machine
+    iResult = getaddrinfo("172.22.152.106", DEFAULT_PORT, &hints, &result);
+    if (iResult != 0) {
+        printf("getaddrinfo failed with error: %d\n", iResult);
+        WSACleanup();
+        return 1;
+    }
+
+    // Attempt to connect to an address until one succeeds
+    for (ptr = result; ptr != NULL; ptr = ptr->ai_next) {
+
+        // Create a SOCKET for connecting to server
+        ConnectSocket = socket(ptr->ai_family, ptr->ai_socktype,
+            ptr->ai_protocol);
+        if (ConnectSocket == INVALID_SOCKET) {
+            printf("socket failed with error: %ld\n", WSAGetLastError());
+            WSACleanup();
+            return 1;
+        }
+
+        // Connect to server.
+        iResult = connect(ConnectSocket, ptr->ai_addr, (int)ptr->ai_addrlen);
+        if (iResult == SOCKET_ERROR) {
+            closesocket(ConnectSocket);
+            ConnectSocket = INVALID_SOCKET;
+            continue;
+        }
+        break;
+    }
+
+    freeaddrinfo(result);
+
+    if (ConnectSocket == INVALID_SOCKET) {
+        printf("Unable to connect to server!\n");
+        WSACleanup();
+        return 1;
+    }
+
+
+    //// -------------------------------------------------opencv raw image code client-----------------------------------------
+
+
+    //---------------------------------------------------a thread to send the frames-----------------------------------------------
+	
+    std::thread t1([](SOCKET ConnectSocket) {
+        Mat img, imgGray;
+        img = Mat::zeros(480, 640, CV_8UC3);
+        //make it continuous
+        if (!img.isContinuous()) {
+            img = img.clone();
+        }
+
+
+
+        VideoCapture cap(1);
+        int imgSize = img.total() * img.elemSize();
+        int bytes = 0;
+        int key;
+
+        while (1) {
+
+            /* get a frame from camera */
+            cap >> img;
+
+            //do video processing here 
+
+            flip(imgGray, imgGray, 1);
+
+            uchar* iptr = imgGray.data;
+
+            if ((bytes = send(ConnectSocket, (char*)iptr, imgSize, 0)) < 0) {
+                std::cerr << "bytes = " << bytes << std::endl;
+                break;
+            }
+
+        }
+        }, ConnectSocket);
+
+
+    //-------------------------------------------------------------------------------------------------
+    t1.join();
+
+    // cleanup
+    closesocket(ConnectSocket);
+    WSACleanup();
+
+    return 0;
+}
